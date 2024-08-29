@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+  cerbos:
+    container_name: cerbos
+    image: ghcr.io/cerbos/cerbos:latest
+    restart: always
+    command: ["tondo", "--log-level=warn"]
+    volumes:
+      - ./cerbos:/policies
+    ports:
+      - 3592:3592
+      - 3593:3593
+
+  admin-api:
+    container_name: admin-api
+    build: .
+    environment:
+      - CERBOS_HOST=cerbos
+    ports:
+      - 8090:8090
+    depends_on:
+      - cerbos

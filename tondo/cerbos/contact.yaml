@@ -1,0 +1,21 @@
+apiVersion: api.cerbos.dev/v1
+resourcePolicy:
+  version: default
+  importDerivedRoles:
+    - common_roles
+  resource: contact
+  rules:
+    - actions: ["*"]
+      effect: EFFECT_ALLOW
+      roles:
+        - admin
+
+    - actions: ["read", "update", "delete"]
+      effect: EFFECT_ALLOW
+      derivedRoles:
+        - owner
+
+    - actions: ["read"]
+      effect: EFFECT_ALLOW
+      roles:
+        - user
