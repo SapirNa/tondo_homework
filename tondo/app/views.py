@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 @api_view(['GET'])
 def get_details(request, userid):
     try:
-        user_data = Data.objects.get(pk=userid)
+        user_data = Data.objects.get(userid=userid)
         logger.info("User found in DB, show details")
         return Response(DataSerialiser(user_data).data)
 
@@ -24,7 +24,7 @@ def get_details(request, userid):
 def save_details(request, userid):
     try:
         user_data = Data.objects.get(pk=userid)
-        user_data.add_role(request.data['role'])
+        user_data.add_role(request.data['roles'])
         user_data.save()
         serializer = DataSerialiser(user_data)
 

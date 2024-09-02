@@ -3,9 +3,10 @@ from django.db import models
 
 
 class Data(models.Model):
+    userid = models.IntegerField()
     roles = models.CharField(max_length=100)
 
-    def add_role(self, role):
+    def add_role(self, role) -> None:
         if not self.roles:
             self.roles = role
         else:
